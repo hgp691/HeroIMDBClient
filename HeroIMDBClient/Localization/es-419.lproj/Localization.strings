@@ -1,0 +1,11 @@
+/* 
+  Localization.strings
+  HeroIMDBClient
+
+  Created by Horacio Guzman on 30/01/21.
+  
+*/
+
+"networkError.badURL" = "URL Mal construida";
+"networkError.noResponse" = "Algo salió mal";
+"networkError.noResponseData" = "Something happened";
