@@ -20,7 +20,12 @@ public struct MovieStorage {
 extension MovieStorage: MovieStorageProtocol {
     
     public func save(moviePage: MoviePage) {
-        moviePage.results.forEach { self.save(movie: $0) }
+        
+        var movies = moviePage.results
+        for index in 0 ..< movies.count {
+            movies[index].page = moviePage.page
+            self.save(movie: movies[index])
+        }
     }
     
     public func save(movie: Movie) {
@@ -75,6 +80,23 @@ extension MovieStorage: MovieStorageProtocol {
                 }
             } catch {
                 print("Error fetching All Movies: \(error.localizedDescription)")
+            }
+            return []
+        }
+    }
+    
+    public func retrieveAllMovies(_ page: Int) -> [Movie] {
+        movieQueue.sync {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDB")
+            request.predicate = NSPredicate(format: "page == %i", Int16(page))
+            request.returnsObjectsAsFaults = true
+            let context = self.store.persistentContainer.viewContext
+            do {
+                if let results = try context.fetch(request) as? [MovieDB] {
+                    return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
+                }
+            } catch {
+                print("Error fetching Movies: \(error.localizedDescription)")
             }
             return []
         }

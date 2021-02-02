@@ -18,4 +18,6 @@ public protocol MovieStorageProtocol {
     func retrieve(movie id: Int) -> Movie?
     /// Retrieve all movies
     func retrieveAllMovies() -> [Movie]
+    /// Retrieve Movies from a page
+    func retrieveAllMovies(_ page: Int) -> [Movie]
 }

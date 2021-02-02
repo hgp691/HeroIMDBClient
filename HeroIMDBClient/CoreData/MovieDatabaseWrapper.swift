@@ -54,6 +54,7 @@ public struct MovieDatabaseWrapper {
         movieDB.vote_average = movie.vote_average
         movieDB.vote_count = movie.vote_count
         movieDB.overview = movie.overview
+        movieDB.page = Int16(movie.page)
         return movieDB
     }
     
@@ -64,7 +65,8 @@ public struct MovieDatabaseWrapper {
                           poster_path: movieDB.poster_path ?? "",
                           vote_average: movieDB.vote_average,
                           vote_count: movieDB.vote_count,
-                          overview: movieDB.overview ?? "")
+                          overview: movieDB.overview ?? "",
+                          page: Int(movieDB.page))
         return movie
     }
 }
