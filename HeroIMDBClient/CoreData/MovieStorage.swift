@@ -57,13 +57,9 @@ extension MovieStorage: MovieStorageProtocol {
             request.predicate = NSPredicate(format: "id == %i", Int16(id))
             request.returnsObjectsAsFaults = true
             let context = self.store.persistentContainer.viewContext
-            do {
-                if let results = try context.fetch(request) as? [MovieDB],
-                   let first = results.first {
-                    return MovieDatabaseWrapper(first).getMovie()
-                }
-            } catch {
-                print("Error fetching Movie: \(error.localizedDescription)")
+            if let results = try? context.fetch(request) as? [MovieDB],
+               let first = results.first {
+                return MovieDatabaseWrapper(first).getMovie()
             }
             return nil
         }
@@ -74,12 +70,8 @@ extension MovieStorage: MovieStorageProtocol {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDB")
             request.returnsObjectsAsFaults = true
             let context = self.store.persistentContainer.viewContext
-            do {
-                if let results = try context.fetch(request) as? [MovieDB] {
-                    return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
-                }
-            } catch {
-                print("Error fetching All Movies: \(error.localizedDescription)")
+            if let results = try? context.fetch(request) as? [MovieDB] {
+                return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
             }
             return []
         }
@@ -91,12 +83,8 @@ extension MovieStorage: MovieStorageProtocol {
             request.predicate = NSPredicate(format: "page == %i", Int16(page))
             request.returnsObjectsAsFaults = true
             let context = self.store.persistentContainer.viewContext
-            do {
-                if let results = try context.fetch(request) as? [MovieDB] {
-                    return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
-                }
-            } catch {
-                print("Error fetching Movies: \(error.localizedDescription)")
+            if let results = try? context.fetch(request) as? [MovieDB] {
+                return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
             }
             return []
         }

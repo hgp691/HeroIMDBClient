@@ -27,13 +27,15 @@ class MovieTests: XCTestCase {
         let vote_average = 50.0
         let vote_count = 1245.0
         let overview = "Overview"
+        let page = 1
         // When
         let movie = Movie(id: id,
                           title: title,
                           poster_path: poster_path,
                           vote_average: vote_average,
                           vote_count: vote_count,
-                          overview: overview)
+                          overview: overview,
+                          page: page)
         // Then
         XCTAssertNotNil(movie, "The initializer must work")
         XCTAssertEqual(movie.id, id, "The parameter must be setted")
