@@ -43,4 +43,18 @@ extension MockURLProtocol {
             return(response, nil)
         }
     }
+    
+    static func returnLoadMovieSucced() {
+        
+        Self.requestHandler = { request in
+            let jsonData = Bundle(for: MockURLProtocol.self)
+                .readLocalJSONFile("LoadMovie_succed")
+            let response = HTTPURLResponse(url: request.url!,
+                                           statusCode: 200,
+                                           httpVersion: nil,
+                                           headerFields: nil)!
+            
+            return(response, jsonData)
+        }
+    }
 }
