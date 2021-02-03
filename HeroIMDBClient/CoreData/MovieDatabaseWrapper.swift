@@ -48,12 +48,13 @@ public struct MovieDatabaseWrapper {
     
     private func getMovieDB(movie: Movie, with context: NSManagedObjectContext) -> MovieDB {
         let movieDB = MovieDB(context: context)
-        movieDB.id = Int16(movie.id)
+        movieDB.id = Int64(movie.id)
         movieDB.title = movie.title
         movieDB.poster_path = movie.poster_path
         movieDB.vote_average = movie.vote_average
         movieDB.vote_count = movie.vote_count
         movieDB.overview = movie.overview
+        movieDB.page = Int16(movie.page ?? -1)
         return movieDB
     }
     
@@ -64,7 +65,8 @@ public struct MovieDatabaseWrapper {
                           poster_path: movieDB.poster_path ?? "",
                           vote_average: movieDB.vote_average,
                           vote_count: movieDB.vote_count,
-                          overview: movieDB.overview ?? "")
+                          overview: movieDB.overview ?? "",
+                          page: Int(movieDB.page))
         return movie
     }
 }

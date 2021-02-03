@@ -20,14 +20,19 @@ public struct MovieStorage {
 extension MovieStorage: MovieStorageProtocol {
     
     public func save(moviePage: MoviePage) {
-        moviePage.results.forEach { self.save(movie: $0) }
+        
+        var movies = moviePage.results
+        for index in 0 ..< movies.count {
+            movies[index].page = moviePage.page
+            self.save(movie: movies[index])
+        }
     }
     
     public func save(movie: Movie) {
         movieQueue.sync {
             let context = self.store.persistentContainer.viewContext
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDB")
-            request.predicate = NSPredicate(format: "id == %i", Int16(movie.id))
+            request.predicate = NSPredicate(format: "id == %i", Int64(movie.id))
             request.returnsObjectsAsFaults = true
             if let results = try? context.fetch(request) as? [MovieDB],
                let firstSaved = results.first {
@@ -49,16 +54,12 @@ extension MovieStorage: MovieStorageProtocol {
     public func retrieve(movie id: Int) -> Movie? {
         movieQueue.sync {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDB")
-            request.predicate = NSPredicate(format: "id == %i", Int16(id))
+            request.predicate = NSPredicate(format: "id == %i", Int64(id))
             request.returnsObjectsAsFaults = true
             let context = self.store.persistentContainer.viewContext
-            do {
-                if let results = try context.fetch(request) as? [MovieDB],
-                   let first = results.first {
-                    return MovieDatabaseWrapper(first).getMovie()
-                }
-            } catch {
-                print("Error fetching Movie: \(error.localizedDescription)")
+            if let results = try? context.fetch(request) as? [MovieDB],
+               let first = results.first {
+                return MovieDatabaseWrapper(first).getMovie()
             }
             return nil
         }
@@ -69,12 +70,21 @@ extension MovieStorage: MovieStorageProtocol {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDB")
             request.returnsObjectsAsFaults = true
             let context = self.store.persistentContainer.viewContext
-            do {
-                if let results = try context.fetch(request) as? [MovieDB] {
-                    return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
-                }
-            } catch {
-                print("Error fetching All Movies: \(error.localizedDescription)")
+            if let results = try? context.fetch(request) as? [MovieDB] {
+                return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
+            }
+            return []
+        }
+    }
+    
+    public func retrieveAllMovies(_ page: Int) -> [Movie] {
+        movieQueue.sync {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "MovieDB")
+            request.predicate = NSPredicate(format: "page == %i", Int64(page))
+            request.returnsObjectsAsFaults = true
+            let context = self.store.persistentContainer.viewContext
+            if let results = try? context.fetch(request) as? [MovieDB] {
+                return results.compactMap { MovieDatabaseWrapper($0).getMovie() }
             }
             return []
         }

@@ -63,6 +63,22 @@ class MovieStorageTests: XCTestCase {
         XCTAssertEqual(moviesFetched.count, page.results.count, "The count must be the same")
     }
     
+    func test_MovieStorage_retrieveAllMoviesOfPage() {
+        // Given
+        let movie1 = Movie.getMockMovie(id: 1, page: 1)
+        let movie2 = Movie.getMockMovie(id: 2, page: 1)
+        let movie3 = Movie.getMockMovie(id: 3, page: 2)
+        movieStorage.save(movie: movie1)
+        movieStorage.save(movie: movie2)
+        movieStorage.save(movie: movie3)
+        // When
+        let moviesPage1 = movieStorage.retrieveAllMovies(1)
+        let moviesPage2 = movieStorage.retrieveAllMovies(2)
+        // Then
+        XCTAssertEqual(moviesPage1.count, 2, "There must be three movies on the page 1")
+        XCTAssertEqual(moviesPage2.count, 1, "There must be one movie on the page 2")
+    }
+    
     func test_MovieStorage_updateNotSave() {
         // Given
         let expectedTitle = "Title Updated"

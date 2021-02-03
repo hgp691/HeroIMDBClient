@@ -17,6 +17,7 @@ extension NetworkRoute {
     /// - Parameter aca:
     public static func getPopularMoviesPage(_ page: Int,
                                             _ enviromentManager: EnviromentManagerProtocol = EnviromentManager()) -> NetworkRoute {
+        let endpoint = "movie/popular"
         let pageToSearch = (page > 0) ? page : 1
         let params = [
             NetworkRoute.Keys.apiKey: enviromentManager.IMDBApiKey ?? "",
@@ -24,6 +25,16 @@ extension NetworkRoute {
             NetworkRoute.Keys.page: "\(pageToSearch)"
         ]
         
-        return NetworkRoute("movie/popular",parameters: params)
+        return NetworkRoute(endpoint, parameters: params)
+    }
+    
+    public static func getMovie(_ movieId: Int,
+                                _ enviromentManager: EnviromentManagerProtocol = EnviromentManager()) -> NetworkRoute {
+        let endpoint = "movie/\(movieId)"
+        let params = [
+            NetworkRoute.Keys.apiKey: enviromentManager.IMDBApiKey ?? "",
+            NetworkRoute.Keys.language: enviromentManager.language ?? "",
+        ]
+        return NetworkRoute(endpoint, parameters: params)
     }
 }
