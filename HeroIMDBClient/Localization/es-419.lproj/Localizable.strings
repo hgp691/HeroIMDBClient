@@ -9,3 +9,7 @@
 "networkError.badURL" = "URL Mal construida";
 "networkError.noResponse" = "Algo salió mal";
 "networkError.noResponseData" = "Something happened";
+
+"moviesGallery.title" = "Películas";
+"moviesGallery.emptyView.buttonTitle" = "  Reintentar  ";
+"moviesGallery.emptyView.description" = "Algo no funciona, por favor intente nuevamente.";

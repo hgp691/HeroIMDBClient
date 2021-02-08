@@ -14,13 +14,9 @@ extension Bundle {
     /// - Parameter name: The name of the JSON file in the Bundle
     /// - Returns: Data encoded with UTF8
     func readLocalJSONFile(_ name: String) -> Data? {
-        do {
-            if let path = self.path(forResource: name, ofType: "json"),
-               let jsonData = try String(contentsOfFile: path).data(using: .utf8) {
-                return jsonData
-            }
-        } catch {
-            print("JSON file \(name).json couldn't be readed \(error.localizedDescription)")
+        if let path = self.path(forResource: name, ofType: "json"),
+           let jsonData = try? String(contentsOfFile: path).data(using: .utf8) {
+            return jsonData
         }
         return nil
     }
