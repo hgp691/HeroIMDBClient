@@ -21,7 +21,7 @@ class NetworkErrorTests: XCTestCase {
     func test_NetworkError_BadURL() {
         // Given
         let error = NetworkError.badURL
-        let expectedMessage = "networkError.badURL".localizedString()
+        let expectedMessage = "networkError.badURL".heroLocalizedString()
         // When
         let description = error.errorDescription
         // Then
@@ -36,7 +36,7 @@ class NetworkErrorTests: XCTestCase {
     func test_NetworkError_NoResponse() {
         // Given
         let error = NetworkError.noResponse
-        let expectedMessage = "networkError.noResponse".localizedString()
+        let expectedMessage = "networkError.noResponse".heroLocalizedString()
         // When
         let description = error.errorDescription
         // Then
@@ -46,7 +46,7 @@ class NetworkErrorTests: XCTestCase {
     func test_NetworkError_noResponseData() {
         // Given
         let error = NetworkError.noResponseData
-        let expectedMessage = "networkError.noResponseData".localizedString()
+        let expectedMessage = "networkError.noResponseData".heroLocalizedString()
         // When
         let description = error.errorDescription
         // Then

@@ -23,11 +23,11 @@ extension NetworkError: LocalizedError {
     public var errorDescription: String? {
         switch self {
             case .badURL:
-                return "networkError.badURL".localizedString()
+                return "networkError.badURL".heroLocalizedString()
             case .noResponse:
-                return "networkError.noResponse".localizedString()
+                return "networkError.noResponse".heroLocalizedString()
             case .noResponseData:
-                return "networkError.noResponseData".localizedString()
+                return "networkError.noResponseData".heroLocalizedString()
             case .imdbError(let error):
                 return error.errors.reduce("") { $0 + "\n" + $1 }
             case .externalError(let error):

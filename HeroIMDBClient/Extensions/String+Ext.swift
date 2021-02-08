@@ -9,7 +9,8 @@ import Foundation
 
 extension String {
     
-    func localizedString() -> String {
-        return NSLocalizedString(self, comment: String())
+    func heroLocalizedString() -> String {
+        
+        return NSLocalizedString(self, comment: "")
     }
 }
