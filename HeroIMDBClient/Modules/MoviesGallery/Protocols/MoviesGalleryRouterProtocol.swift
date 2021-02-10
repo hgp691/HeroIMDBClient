@@ -9,6 +9,8 @@ import UIKit
 
 public protocol MoviesGalleryRouterProtocol: class {
     
+    /// Coordinator to handle navigation
+    var coordinator: CoordinatorProtocol? { get set }
     /// Function to allow presenting AlertControllers
     /// - Parameter message: The message for the UIAlertController
     /// - Parameter completion: The completion if needed
@@ -17,5 +19,5 @@ public protocol MoviesGalleryRouterProtocol: class {
     /// - Parameter movie: The Movie to load in detail
     func pushDetailModule(with movie: Movie)
     /// Function used to build the current module
-    static func buildModule() -> UIViewController
+    static func buildModule(with coordinator: CoordinatorProtocol?) -> UIViewController
 }

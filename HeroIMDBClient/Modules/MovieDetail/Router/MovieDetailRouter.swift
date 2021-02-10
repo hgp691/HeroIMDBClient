@@ -9,7 +9,9 @@ import UIKit
 
 class MovieDetailRouter: MovieDetailRouterProtocol {
     
-    static func buildModule(_ movie: Movie) -> UIViewController {
+    var coordinator: CoordinatorProtocol?
+    
+    static func buildModule(_ movie: Movie, _ coordinator: CoordinatorProtocol? = nil) -> UIViewController {
         // View
         guard let view = MovieDetailViewController.instantiate() else {
             return UIViewController()
@@ -24,6 +26,7 @@ class MovieDetailRouter: MovieDetailRouterProtocol {
         let presenter = MovieDetailPresenter()
         // Router
         let router = MovieDetailRouter()
+        router.coordinator = coordinator
         
         view.presenter = presenter
         

@@ -8,7 +8,8 @@
 import UIKit
 
 public protocol MovieDetailRouterProtocol: class {
-    
+    /// Coordinator to handle Navigation
+    var coordinator: CoordinatorProtocol? { get set }
     /// Function used to build the current module
-    static func buildModule(_ movie: Movie) -> UIViewController
+    static func buildModule(_ movie: Movie,_ coordinator: CoordinatorProtocol?) -> UIViewController
 }
