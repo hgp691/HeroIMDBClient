@@ -114,7 +114,9 @@ extension MoviesGalleryViewController: MoviesGalleryViewProtocol {
     
     func addData(movies: [MovieCellViewModel]) {
         if !movies.isEmpty {
-            collectionView.backgroundView = nil
+            DispatchQueue.main.async {
+                self.collectionView.backgroundView = nil
+            }
         }
         dataSourceSnapshot = DataSourceSnapshot()
         dataSourceSnapshot.appendSections([.main])

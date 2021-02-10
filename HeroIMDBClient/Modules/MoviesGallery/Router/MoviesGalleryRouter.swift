@@ -9,6 +9,8 @@ import UIKit
 
 public class MoviesGalleryRouter: MoviesGalleryRouterProtocol {
     
+    public var coordinator: CoordinatorProtocol?
+    
     init() { }
     
     public func presentAlert(message: String, completion: (() -> Void)?) {
@@ -16,10 +18,10 @@ public class MoviesGalleryRouter: MoviesGalleryRouterProtocol {
     }
     
     public func pushDetailModule(with movie: Movie) {
-        
+        coordinator?.showMovieDetail(isRoot: false, movie: movie)
     }
     
-    public static func buildModule() -> UIViewController {
+    public static func buildModule(with coordinator: CoordinatorProtocol? = nil) -> UIViewController {
         /// View
         guard let view = MoviesGalleryViewController.instantiate() else {
             return UIViewController()
@@ -33,6 +35,7 @@ public class MoviesGalleryRouter: MoviesGalleryRouterProtocol {
         let presenter = MoviesGalleryPresenter()
         /// Router
         let router = MoviesGalleryRouter()
+        router.coordinator = coordinator
         
         view.presenter = presenter
         presenter.view = view

@@ -11,6 +11,7 @@ import HeroIMDBClient
 
 class PresenterTestsRouterMock: MoviesGalleryRouterProtocol {
     
+    var coordinator: CoordinatorProtocol?
     var pushWithMovie: Movie?
     var didPresentAlert: Bool = false
     
@@ -22,7 +23,7 @@ class PresenterTestsRouterMock: MoviesGalleryRouterProtocol {
         pushWithMovie = movie
     }
     
-    static func buildModule() -> UIViewController {
+    static func buildModule(with coordinator: CoordinatorProtocol?) -> UIViewController {
         return UIViewController()
     }
 }
