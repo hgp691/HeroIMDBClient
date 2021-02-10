@@ -42,20 +42,54 @@ public struct DataManager: DataManagerProtocol {
     public func getAMovie(movieId: Int,
                           onSucced: ((Movie) -> Void)?,
                           onError: ((Error) -> Void)?) {
-        if let movie = self.storage.retrieve(movie: movieId) {
-            onSucced?(movie)
-        } else {
-            let route = NetworkRoute.getMovie(movieId)
-            networkProvider.requestGET(route) { (result: Result<Movie, NetworkError>) in
-                switch result {
-                    case .success(let movie):
-                        self.storage.save(movie: movie)
-                        onSucced?(movie)
-                    case .failure(let error):
-                        onError?(error)
-                }
+        
+        var loadedMovie: Movie?
+        var loadedError: Error?
+        
+        let getMovieGroup = DispatchGroup()
+        
+        let routeLoadMovie = NetworkRoute.getMovie(movieId)
+        getMovieGroup.enter()
+        networkProvider.requestGET(routeLoadMovie) { (result: Result<Movie, NetworkError>) in
+            switch result {
+                case .success(let movie):
+                    self.storage.save(movie: movie)
+                    loadedMovie = movie
+                    getMovieGroup.leave()
+                case .failure(let error):
+                    loadedError = error
+                    getMovieGroup.leave()
             }
         }
         
+        let routeGetCredits = NetworkRoute.getCredits(movieId)
+        
+        var loadedCredits: Credits?
+        
+        getMovieGroup.enter()
+        networkProvider.requestGET(routeGetCredits) { (result: Result<Credits, NetworkError>) in
+            switch result {
+                case .success(let credits):
+                    loadedCredits = credits
+                    getMovieGroup.leave()
+                case .failure(let error):
+                    loadedError = error
+                    getMovieGroup.leave()
+            }
+        }
+        
+        getMovieGroup.notify(queue: .global()) {
+            if var loadedMovieStrong = loadedMovie {
+                loadedMovieStrong.cast = loadedCredits?.cast
+                loadedMovieStrong.crew = loadedCredits?.crew
+                onSucced?(loadedMovieStrong)
+            } else if var movie = self.storage.retrieve(movie: movieId) {
+                movie.cast = loadedCredits?.cast
+                movie.crew = loadedCredits?.crew
+                onSucced?(movie)
+            } else if let error = loadedError {
+                onError?(error)
+            }
+        }
     }
 }

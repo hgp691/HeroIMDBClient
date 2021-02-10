@@ -37,4 +37,14 @@ extension NetworkRoute {
         ]
         return NetworkRoute(endpoint, parameters: params)
     }
+    
+    public static func getCredits(_ movieId: Int,
+                                  _ enviromentManager: EnviromentManagerProtocol = EnviromentManager()) -> NetworkRoute {
+        let endpoint = "movie/\(movieId)/credits"
+        let params = [
+            NetworkRoute.Keys.apiKey: enviromentManager.IMDBApiKey ?? "",
+            NetworkRoute.Keys.language: enviromentManager.language ?? "",
+        ]
+        return NetworkRoute(endpoint, parameters: params)
+    }
 }

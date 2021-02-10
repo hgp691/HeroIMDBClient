@@ -45,7 +45,6 @@ final class MoviesGalleryViewController: HeroViewController, InstantiationProtoc
         self.navigationItem.title = "moviesGallery.title".heroLocalizedString()
         setupCollectionView()
         presenter?.viewDidLoad()
-        print("moviesGallery.title".heroLocalizedString())
     }
     
     /// Function to setup the CollectionView

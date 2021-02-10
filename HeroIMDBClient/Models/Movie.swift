@@ -17,6 +17,8 @@ public struct Movie: Decodable {
     var vote_count: Double
     var overview: String
     var page: Int? = -1
+    var cast: [Person]?
+    var crew: [Person]?
     
     public init(id: Int, title: String, poster_path: String, vote_average: Double, vote_count: Double, overview: String, page: Int = -1) {
         self.id = id
