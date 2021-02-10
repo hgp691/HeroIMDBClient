@@ -11,7 +11,6 @@ public protocol MoviesGalleryInteractorProtocol: class {
     
     var output: MoviesGalleryOutputProtocol? { get set }
     var dataManager: DataManagerProtocol { get set }
-    
     /// Function that retrieve a page of Movies
     func getMoviesPage(page: Int)
 }

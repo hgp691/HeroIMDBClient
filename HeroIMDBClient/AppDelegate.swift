@@ -15,8 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let moviesGalleryModule = MoviesGalleryRouter.buildModule()
-        let navigationController = UINavigationController(rootViewController: moviesGalleryModule)
+        let movie = Movie.init(id: 399566,
+                               title: "",
+                               poster_path: "",
+                               vote_average: 2,
+                               vote_count: 2,
+                               overview: "")
+        
+//        let moviesGalleryModule = MoviesGalleryRouter.buildModule()
+        let movieDetailModule = MovieDetailRouter.buildModule(movie)
+        let navigationController = UINavigationController(rootViewController: movieDetailModule)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.tintColor = .systemRed

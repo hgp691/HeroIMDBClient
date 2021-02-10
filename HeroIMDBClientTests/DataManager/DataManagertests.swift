@@ -77,22 +77,6 @@ class DataManagertests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
     
-    func test_DataManagertests_loadMovie_Succed_FromStore() {
-        // Given
-        let expectedId = 1
-        let movie1 = Movie.getMockMovie(id: expectedId)
-        storage.save(movie: movie1)
-        let expectation = XCTestExpectation(description: "Datamanager expectation")
-        // When
-        dataManager.getAMovie(movieId: expectedId, onSucced: { (movie) in
-            // Then
-            XCTAssertNotNil(movie)
-            XCTAssertEqual(movie.id, expectedId, "The id must be the same")
-            expectation.fulfill()
-        }, onError: nil)
-        wait(for: [expectation], timeout: 10.0)
-    }
-    
     func test_DataManagertests_loadMovie_Succed_FromNetworking() {
         // Given
         MockURLProtocol.returnLoadMovieSucced()

@@ -13,3 +13,8 @@
 "moviesGallery.title" = "Películas";
 "moviesGallery.emptyView.buttonTitle" = "  Reintentar  ";
 "moviesGallery.emptyView.description" = "Algo no funciona, por favor intente nuevamente.";
+
+"movieDetail.movieTitle.title" = "Sinopsis";
+"movieDetail.movieCast.title" = "Reparto";
+"movieDetail.movieDirector.title" = "Director";
+"movieDetail.movieDirectors.title" = "Directores";

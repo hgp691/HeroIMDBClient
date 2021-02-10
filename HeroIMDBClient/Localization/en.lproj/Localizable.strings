@@ -13,3 +13,8 @@
 "moviesGallery.title" = "Movies";
 "moviesGallery.emptyView.buttonTitle" = "  Retry  ";
 "moviesGallery.emptyView.description" = "Something happend, please try again.";
+
+"movieDetail.movieTitle.title" = "Summary";
+"movieDetail.movieCast.title" = "Cast";
+"movieDetail.movieDirector.title" = "Director";
+"movieDetail.movieDirectors.title" = "Directors";

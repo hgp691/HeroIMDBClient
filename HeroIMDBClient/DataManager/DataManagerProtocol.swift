@@ -27,4 +27,5 @@ public protocol DataManagerProtocol {
         onSucced: ((Movie) -> Void)?,
         onError: ((Error) -> Void)?
     )
+
 }
