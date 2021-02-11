@@ -1,0 +1,20 @@
+/* 
+  Localization.strings
+  HeroIMDBClient
+
+  Created by Horacio Guzman on 30/01/21.
+  
+*/
+
+"networkError.badURL" = "URL Mal construida";
+"networkError.noResponse" = "Algo salió mal";
+"networkError.noResponseData" = "Something happened";
+
+"moviesGallery.title" = "Películas";
+"moviesGallery.emptyView.buttonTitle" = "  Reintentar  ";
+"moviesGallery.emptyView.description" = "Algo no funciona, por favor intente nuevamente.";
+
+"movieDetail.movieTitle.title" = "Sinopsis";
+"movieDetail.movieCast.title" = "Reparto";
+"movieDetail.movieDirector.title" = "Director";
+"movieDetail.movieDirectors.title" = "Directores";
