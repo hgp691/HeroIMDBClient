@@ -83,4 +83,20 @@ class MovieDetailPresenterTests: XCTestCase {
         let isCast = castViewModel is PersonsCellViewModel
         XCTAssertTrue(isCast, "The directors Must Be setted")
     }
+    
+    func test_MovieDetailPresenter_theDirectorsMustNotBeSetted() {
+        // Given
+        var movie = Movie.getMockMovie(id: 1)
+        let crew = Person.getMockCrew(quantity: 2, quantityDirectors: 0)
+        movie.crew = crew
+        let dataManager = MockMovieDetailDataManager(movie: movie, error: nil)
+        let interactor = MockMovieDetailInteractor(dataManager: dataManager)
+        interactor.movie = movie
+        presenter.interactor = interactor
+        // When
+        presenter.didLoadedMovie()
+        /// Then
+
+        XCTAssertEqual(presenter.viewmodelsCount, 2, "The ViewModels doesn't has a directors viewModel")
+    }
 }

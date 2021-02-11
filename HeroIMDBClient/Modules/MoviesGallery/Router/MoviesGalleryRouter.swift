@@ -14,7 +14,7 @@ public class MoviesGalleryRouter: MoviesGalleryRouterProtocol {
     init() { }
     
     public func presentAlert(message: String, completion: (() -> Void)?) {
-        
+        coordinator?.showAlert(message, completion: completion)
     }
     
     public func pushDetailModule(with movie: Movie) {

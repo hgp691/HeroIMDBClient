@@ -33,6 +33,10 @@ class MainCoordinator: CoordinatorProtocol {
         }
     }
     
+    func showAlert(_ message: String, completion: (() -> Void)?) {
+        
+    }
+    
     private func putAsRoot(viewController: UIViewController) {
         navigationController.setViewControllers([viewController], animated: true)
     }
