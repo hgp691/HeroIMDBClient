@@ -1,0 +1,28 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/srYya1ZlI97Au4jUYAktDe3avyA.jpg",
+            "genre_ids": [
+                14,
+                28,
+                12
+            ],
+            "id": 464052,
+            "original_language": "en",
+            "original_title": "Wonder Woman 1984",
+            "overview": "En 1984, en plena guerra fría, Diana Prince, conocida como Wonder Woman se enfrenta al empresario Maxwell Lord y a su antigua amiga Barbara Minerva / Cheetah, una villana que posee fuerza y agilidad sobrehumanas.",
+            "popularity": 2816.455,
+            "poster_path": "/oG8rC5WEUFEMsMeBLGJWspJ1Gp5.jpg",
+            "release_date": "2020-12-16",
+            "title": "Wonder Woman 1984",
+            "video": false,
+            "vote_average": 7.1,
+            "vote_count": 3152
+        }
+    ],
+    "total_pages": 500,
+    "total_results": 10000
+}
+

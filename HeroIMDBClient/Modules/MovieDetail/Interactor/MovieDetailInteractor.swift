@@ -20,10 +20,13 @@ class MovieDetailInteractor: MovieDetailInteractorProtocol {
     }
     
     func loadMovie() {
+        
         dataManager.getAMovie(movieId: movie.id) { [weak self] (movie) in
+            
             self?.movie = movie
             self?.output?.didLoadedMovie()
         } onError: { [weak self] (error) in
+            
             self?.output?.didLoadedMovieFailed(error: error)
         }
     }
